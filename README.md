@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <title>Aha Card</title>
+  </head>
+  <body>
+    <div class="screen1">
+      <div class="card-wrapper">
+        <div class="card">
+          <img src="/assets/images/card1.png" class="bg" />
+          <img src="/assets/images/logo.png" class="logo" />
+          <div class="name-container">
+            <div class="fname">JOHANNES</div>
+            <div class="sname">STIEBER</div>
+          </div>
+          <div class="info-container">
+            <div class="bday">26.01.2003</div>
+            <div class="plz">6800 Feldkirch</div>
+          </div>
+          <img class="user" src="/assets/images/jj.jpg" />
+          <div class="info2-container">
+            <div class="gueltig">aha card gültig bis 12 | 2028</div>
+            <div class="gueltig2">Ermäßigung gültig bis 12 | 2028</div>
+            <div class="id">N0230361040F</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="images">
+          <img src="/assets/images/gemeindeverband.png" id="gemeindeverband" />
+          <img
+            src="/assets/images/unserlandvorarlberg.png"
+            id="unserlandvorarlberg"
+          />
+          <img src="/assets/images/polizei.png" id="polizei" />
+        </div>
+        <div class="timer">12.02.2020 - 12:32:23</div>
+      </div>
+    </div>
+    <div class="screen2 screen-disabled">
+      <div class="card-wrapper">
+        <div class="card">
+          <img src="/assets/images/card2.png" class="bg" />
+          <div class="name2-container">
+            <div class="fname">Johannes</div>
+            <div class="sname">Stieber</div>
+          </div>
+          <div class="ages-container">
+            <span class="age"> 18 </span>
+            <span class="age-label"> JAHRE </span>
+          </div>
+          <img src="/assets/images/jj.jpg" class="user2" />
+        </div>
+      </div>
+      <div class="footer2">
+        <div class="images2">
+          <img src="/assets/images/wko.png" id="wko" />
+          <img
+            src="/assets/images/unserlandvorarlberg.png"
+            id="unserlandvorarlberg"
+          />
+          <img src="/assets/images/polizei.png" id="polizei" />
+        </div>
+      </div>
+    </div>
+    <script>
+      var year = 18;
+
+      var lastclick = 0;
+      var screen = 1;
+      var screen1 = document.querySelector(".screen1");
+      var screen2 = document.querySelector(".screen2");
+      document.querySelectorAll(".card").forEach((i) => {
+        i.addEventListener("dblclick", () => {
+          swapScreen();
+        });
+      });
+      function startYearAnimation() {
+        var a = document.querySelector(".age");
+        a.innerHTML = 0;
+        var i = 1;
+        var interval = setInterval(() => {
+          if (i >= year) clearInterval(interval);
+          a.innerHTML = i;
+          i++;
+        }, 80);
+      }
+      function swapScreen() {
+        if (screen == 1) {
+          screen = 2;
+          screen1.classList.add("screen-disabled");
+          screen2.classList.remove("screen-disabled");
+          startYearAnimation();
+        } else if (screen == 2) {
+          screen = 1;
+          screen2.classList.add("screen-disabled");
+          screen1.classList.remove("screen-disabled");
+        }
+      }
+      var e = document.querySelector(".timer");
+      setInterval(() => {
+        function pad(d) {
+          if (d < 10) {
+            return "0" + d.toString();
+          }
+          return d.toString();
+        }
+        var d = new Date();
+        var t =
+          pad(d.getDate()) +
+          "." +
+          pad(d.getMonth()) +
+          "." +
+          d.getFullYear() +
+          " - " +
+          pad(d.getHours()) +
+          ":" +
+          pad(d.getMinutes()) +
+          ":" +
+          pad(d.getSeconds());
+        e.innerHTML = t;
+      }, 1000);
+    </script>
+  </body>
+</html>
